@@ -15,5 +15,10 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^6.0.0"
+  },
+  "dependencies": {
+    "joi": "^17.4.0",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21"
   }
 }
