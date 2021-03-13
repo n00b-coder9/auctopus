@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const user = require('./routes/users');
-
+const auth = require('./routes/auth');
 
 // Configuing environment variables
 dotenv.config();
@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 
 // Setting routes for delegations
 app.use('/api/users/', user);
+app.use('/api/auth/', auth);
 
 // Setup the mongoDB connection
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/auctopus';
