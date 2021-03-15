@@ -10,7 +10,12 @@ router.route('/').post(async (req, res) => {
 
   // finding whether user already exists
   const result = await User.findOne({email: req.body.email});
-  if (result) return res.status(400).send('user already exists');
+  if (result) {
+    return res.status(400).json({
+      'signup': 'Failed',
+      'error': 'user already exists',
+    });
+  }
 
   // creating new user
   const user = new User({
@@ -24,12 +29,15 @@ router.route('/').post(async (req, res) => {
 
   // inserting into users collections
   user.save()
-      .then((message) => res.send({
-        _id: message._id,
-        name: message.name,
-        email: message.email,
+      .then((message) => res.json({
+        'signup': 'Successful',
+        '_id': message._id,
+        'name': message.name,
+        'email': message.email,
       }))
-      .catch((err) => res.status(400).send('Error: ' + err));
+      .catch((err) => res.status(400).json({
+        'error': err,
+      }));
 });
 
 
