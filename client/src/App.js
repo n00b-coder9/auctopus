@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import React from 'react';
-import './App.css';
+/* eslint-disable new-cap */
+import React, { Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Auth from './hoc/auth';
+// pages for this product
+import LandingPage from './components/views/LandingPage/LandingPage';
+import LoginPage from './components/views/LoginPage/LoginPage.js';
+import RegisterPage from './components/views/RegisterPage/RegisterPage.js';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={(<div>Loading...</div>)}>
+      <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
+        <Switch>
+          <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/login" component={Auth(LoginPage, false)} />
+          <Route exact path="/register" component={Auth(RegisterPage, false)} />
+        </Switch>
+      </div>
+    </Suspense>
   );
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from './types';
-import { USER_SERVER } from '../components/Config.js';
+import { USER_SERVER } from '../components/config';
 
 export function registerUser(dataToSubmit) {
   const request = axios

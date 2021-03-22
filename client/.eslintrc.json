@@ -35,7 +35,8 @@
         ],
         "require-jsdoc": "off",
         "valid-jsdoc": "off",
-        "no-console": "error",
+        "new-cap": 0,
+        "no-console": "off",
         "object-curly-spacing": [
             "error",
             "always"
