@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
 import React from 'react';
 import moment from 'moment';
-import { Formik } from 'formik';
+import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { registerUser } from '../../../_actions/user_actions';
 import { useDispatch } from 'react-redux';
@@ -14,9 +15,34 @@ import {
   Form,
   Input,
   Button,
-  AutoComplete,
+  Checkbox, Collapse,
 } from 'antd';
-
+const categories = [
+  {
+    '_id': 1,
+    'name': 'Automobile',
+  },
+  {
+    '_id': 2,
+    'name': 'Fashion',
+  },
+  {
+    '_id': 3,
+    'name': 'Electronics',
+  },
+  {
+    '_id': 4,
+    'name': 'Sports',
+  },
+  {
+    '_id': 5,
+    'name': 'Antiques',
+  },
+  {
+    '_id': 6,
+    'name': 'Miscellaneous',
+  },
+];
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -56,6 +82,7 @@ function RegisterPage(props) {
           name: '',
           password: '',
           confirmPassword: '',
+          favourites: [],
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string()
@@ -80,6 +107,7 @@ function RegisterPage(props) {
               name: values.name,
               lastname: values.lastname,
               image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
+              favourites: values.favourites,
             };
 
             dispatch(registerUser(dataToSubmit)).then((response) => {
@@ -194,7 +222,35 @@ function RegisterPage(props) {
                     <div className="input-feedback">{errors.confirmPassword}</div>
                   )}
                 </Form.Item>
+                <Form.Item label="Favourites" required>
+                  <div role="group" aria-labelledby="checkbox-group">
+                    <label>
+                      <Field type="checkbox" name="favourites" value="One_" />
+              One_
+                    </label>&nbsp;
+                    <label>
+                      <Field type="checkbox" name="favourites" value="Two_" />
+              Two_
+                    </label>&nbsp;
+                    <label>
+                      <Field type="checkbox" name="cfavourites" value="Thr_ee" />
+              Three_
+                    </label> &nbsp;<br/>
 
+                    <label>
+                      <Field type="checkbox" name="favourites" value="One" />
+              One
+                    </label>&nbsp;
+                    <label>
+                      <Field type="checkbox" name="favourites" value="Two" />
+              Two
+                    </label>&nbsp;
+                    <label>
+                      <Field type="checkbox" name="cfavourites" value="Three" />
+              Three
+                    </label> &nbsp;
+                  </div>
+                </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button onClick={handleSubmit} type="primary" disabled={isSubmitting}>
                   Submit

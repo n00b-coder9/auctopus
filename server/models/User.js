@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable new-cap */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -21,6 +23,10 @@ const userSchema = mongoose.Schema({
   lastname: {
     type: String,
     maxlength: 50,
+  },
+  role: {
+    type: Number,
+    default: 0,
   },
   favourites: {
     type: Array,

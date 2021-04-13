@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable new-cap */
 const express = require('express');
 const router = express.Router();
 const {User} = require('../models/User');
@@ -18,14 +20,12 @@ router.get('/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
-    cart: req.user.cart,
-    history: req.user.history,
   });
 });
 
 router.post('/register', (req, res) => {
   const user = new User(req.body);
-
+  console.log(user);
   user.save((err, doc) => {
     if (err) return res.json({success: false, err});
     return res.status(200).json({
@@ -71,3 +71,4 @@ router.get('/logout', auth, (req, res) => {
   });
 });
 
+module.exports = router;
