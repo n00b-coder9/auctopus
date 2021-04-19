@@ -1,7 +1,11 @@
+/* eslint-disable max-len */
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const user = require('./routes/users');
+const product = require('./routes/product');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 // const auth = require('./routes/auth');
 
 // Configuing environment variables
@@ -30,9 +34,16 @@ app.use((req, res, next) => {
 // });
 
 // Setting routes for delegations
+app.use(cors());
+app.use(cookieParser());
 app.use('/api/users/', user);
-// app.use('/api/auth/', auth);
+app.use('/api/product', product);
 
+// app.use('/api/auth/', auth);
+// use this to show the image you have in node js server to client (react js)
+// https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
+
+app.use('/uploads', express.static('uploads'));
 // Setup the mongoDB connection
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/auctopus';
 

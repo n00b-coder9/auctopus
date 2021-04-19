@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import Auth from './hoc/auth';
 // pages for this product
 import LandingPage from './components/views/LandingPage/LandingPage';
-import LoginPage from './components/views/LoginPage/LoginPage.js';
+import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage.js';
-
+import UploadProductPage from './components/views/UploadProductPage/UploadProductPage';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} />
         </Switch>
       </div>
     </Suspense>
