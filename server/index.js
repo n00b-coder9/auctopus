@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
@@ -41,7 +40,10 @@ app.use('/api/product', product);
 
 // app.use('/api/auth/', auth);
 // use this to show the image you have in node js server to client (react js)
-// https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
+/**
+ * https://stackoverflow.com/questions/48914987/
+   send - image - path - from - node - js - express - server - to - react - client
+ */
 
 app.use('/uploads', express.static('uploads'));
 // Setup the mongoDB connection

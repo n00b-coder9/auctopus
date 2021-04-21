@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
@@ -61,8 +59,10 @@ function FileUpload(props) {
       <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
 
         {Images.map((image, index) => (
-          <div onClick={() => onDelete(image)}>
-            <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`http://localhost:8080/${image}`} alt={`productImg-${index}`} />
+          <div key={index} onClick={() => onDelete(image)}>
+            <img style={{ minWidth: '300px', width: '300px', height: '240px' }}
+              src={`http://localhost:8080/${image}`}
+              alt={`productImg-${index}`} />
           </div>
         ))}
 
