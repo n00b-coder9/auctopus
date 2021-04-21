@@ -109,7 +109,7 @@ function Navigation() {
 
   // List of options in the drawer
   const list = [
-    { type: 'entry', title: 'Home', to: '/home', icon: <HomeIcon /> },
+    { type: 'entry', title: 'Home', to: '/', icon: <HomeIcon /> },
     { type: 'entry', title: 'Dashboard', to: '/dashboard', icon: <DashboardIcon /> },
   ];
     // List of options in the drawer which will be shown at bottom
