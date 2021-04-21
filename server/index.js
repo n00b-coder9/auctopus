@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const user = require('./routes/users');
 const product = require('./routes/product');
+const comment = require('./routes/comment');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 // const auth = require('./routes/auth');
@@ -38,6 +39,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use('/api/users/', user);
 app.use('/api/product', product);
+app.use('/api/comment', comment);
 
 // app.use('/api/auth/', auth);
 // use this to show the image you have in node js server to client (react js)
