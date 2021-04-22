@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import CardContainer from './Cards/CardContainer';
 
-function LandingPage() {
-  return (
-    <div>
-            Landing Page
-    </div>
-  );
+class LandingPage extends Component {
+  render() {
+    return (
+      <CardContainer/>
+    );
+  }
 }
 
 export default LandingPage;
