@@ -35,7 +35,7 @@ export function auth() {
   };
 }
 
-export function logoutUser() {
+export const logoutUser = async () => {
   const request = axios
       .get(`${USER_SERVER}/logout`)
       .then((response) => response.data);
@@ -44,4 +44,4 @@ export function logoutUser() {
     type: LOGOUT_USER,
     payload: request,
   };
-}
+};
