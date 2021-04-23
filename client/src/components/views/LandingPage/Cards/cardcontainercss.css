@@ -1,0 +1,6 @@
+.flex-container {
+  display: flex;
+  width: 1800px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

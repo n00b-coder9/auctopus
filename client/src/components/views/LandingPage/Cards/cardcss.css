@@ -2,7 +2,11 @@ body {
   background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
 }
 .card {
-  width: 20rem;
+  width: 25rem;
+  height: 500px;
+  margin: 4%;
+  border-color: solid rgb(15, 10, 10);
+  border-width: 2px;
 }
 .card:hover {
   box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
@@ -23,14 +27,18 @@ body {
 }
 .overflow {
   overflow: hidden;
+  height: 400px;
+}
+.card-image {
+  height: 300px;
 }
 .card-img-top {
   transform: scale(1);
-  transition: transform 1s;
+  transition: transform 1.5s;
 }
 
 .card-img-top:hover {
-  transform: scale(1.8);
+  transform: scale(1.5);
 }
 
 .container-fluid {

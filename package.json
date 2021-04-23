@@ -20,11 +20,7 @@
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
     "antd": "^4.14.0",
-<<<<<<< HEAD
     "material-ui": "^0.20.2",
-=======
-    "bcrypt": "^5.0.1",
->>>>>>> e42ceb6... Added cards in the landing page
     "react-image-gallery": "^1.0.9",
     "react-router-dom": "^5.2.0"
   }
