@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import { Typography, Button, Form, Input } from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
@@ -34,16 +37,24 @@ const categorys = [
   { key: 6, value: 'Miscellaneous' },
 ];
 
+const timeslots = [
+  { key: 1, value: '10:00 am' },
+  { key: 2, value: '4:00 pm' },
+  { key: 3, value: '8:00 pm' },
+  { key: 4, value: '2:00 am' },
+];
+
 
 function UploadProductPage(props) {
   const [TitleValue, setTitleValue] = useState('');
   const [DescriptionValue, setDescriptionValue] = useState('');
   const [PriceValue, setPriceValue] = useState(0);
   const [categoryValue, setcategoryValue] = useState(1);
-
+  const [timeslotValue, settimeslotValue] = useState(1);
+  const [startDate, setStartDate] = useState(new Date());
   const [Images, setImages] = useState([]);
-
-
+  const currentDate = new Date();
+  // console.log(currentDate);
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
   };
@@ -59,6 +70,9 @@ function UploadProductPage(props) {
   const oncategorysSelectChange = (event) => {
     setcategoryValue(event.currentTarget.value);
   };
+  const ontimeslotSelectChange = (event) => {
+    settimeslotValue(event.currentTarget.value);
+  };
 
   const updateImages = (newImages) => {
     setImages(newImages);
@@ -71,7 +85,9 @@ function UploadProductPage(props) {
             !categoryValue || !Images) {
       return alert('fill all the fields first!');
     }
-
+    if (currentDate >= startDate) {
+      return alert('Auction Date should be in the future');
+    }
     const variables = {
       writer: props.user.userData._id,
       title: TitleValue,
@@ -79,6 +95,8 @@ function UploadProductPage(props) {
       basePrice: PriceValue,
       images: Images,
       category: categoryValue,
+      date: startDate,
+      timeslot: timeslotValue,
     };
 
     Axios.post('/api/product/uploadProduct', variables)
@@ -127,8 +145,20 @@ function UploadProductPage(props) {
           type="number"
         />
         <br /><br />
+        <label>Date Of Auction</label><br />
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+        <br /><br />
+        <label>Category</label><br />
         <select onChange={oncategorysSelectChange}>
           {categorys.map((item) => (
+            <option key={item.key} value={item.key}>{item.value} </option>
+          ))}
+        </select>
+        <br />
+        <br />
+        <label>Auction Time Slot</label><br />
+        <select onChange={ontimeslotSelectChange}>
+          {timeslots.map((item) => (
             <option key={item.key} value={item.key}>{item.value} </option>
           ))}
         </select>

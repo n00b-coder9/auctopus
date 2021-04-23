@@ -66,4 +66,16 @@ router.get('/products_by_id', (req, res) => {
       });
 });
 
+router.post('/add_user', (req, res) => {
+  // console.log(req.body);
+  const productId = req.body.productId;
+
+  // we need to find the product information that belong to product Id
+  Product.findOneAndUpdate({ '_id': productId }, { $push: {'buyers': req.body.writer } })
+      .exec((err, result) => {
+        if (err) return req.status(400).send(err);
+        return res.status(200).json({success: true, result});
+      });
+});
+
 module.exports = router;
