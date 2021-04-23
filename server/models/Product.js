@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+mongoose.set('useFindAndModify', false);
 const productSchema = mongoose.Schema({
   writer: {
     type: Schema.Types.ObjectId,
@@ -29,7 +29,11 @@ const productSchema = mongoose.Schema({
   date: {
     type: Date,
   },
-  Buyers: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  timeslot: {
+    type: Number,
+    default: 1,
+  },
+  buyers: [{type: Schema.Types.ObjectId, ref: 'User'}],
 }, {timestamps: true});
 
 
