@@ -33,6 +33,7 @@ import { Typography } from '../../utils/Wrappers';
 import Dot from '../../utils/Sidebar/components/Dot';
 import Table from './components/Table/Table';
 import BigStat from './components/BigStat/BigStat';
+import { withRouter } from 'react-router';
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -42,7 +43,7 @@ const PieChartData = [
   { name: 'Group D', value: 200, color: 'success' },
 ];
 
-export default function Dashboard(props) {
+function Dashboard(props) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -52,7 +53,9 @@ export default function Dashboard(props) {
     // code to call the data from backend
   }, []);
   return (
-    <>
+    <div style={{
+      flex: 1,
+    }}>
       <PageTitle title="Dashboard" button={<Button
         variant="contained"
         size="medium"
@@ -415,7 +418,7 @@ export default function Dashboard(props) {
           </Widget>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
 
@@ -457,3 +460,5 @@ function getMainChartData() {
 
   return resultArray;
 }
+
+export default withRouter(Dashboard);
