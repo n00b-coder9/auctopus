@@ -13,7 +13,8 @@ export default function Navigator() {
         <h2 style={{ fontFamily: 'cursive', color: 'brown' }}>
           <u><b><i>Auction Items</i></b></u></h2>
         <Links to='/product/upload'>
-          <img src='/upload.png' width='270' height='130' className="upload-image" />
+          <img src='/upload.png' width='270' height='130' className="upload-image"
+            data-toggle="tooltip" title="Upload Product" />
         </Links>
 
       </div>
