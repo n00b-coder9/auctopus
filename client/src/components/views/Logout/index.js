@@ -6,7 +6,7 @@ const Logout = () => {
   const dispatch = useDispatch();
   dispatch(logoutUser());
   return (
-    <Redirect to='/home'/>
+    <Redirect to='/'/>
   );
 };
 

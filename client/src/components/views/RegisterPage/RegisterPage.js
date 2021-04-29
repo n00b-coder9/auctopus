@@ -133,6 +133,13 @@ function RegisterPage(props) {
             handleSubmit,
             handleReset,
           } = props;
+
+          const fav = categories.map((i) =>
+            <label key={i}>
+              <Field type="checkbox" name="favourites" value={i._id} />
+              {i.name}
+              <br />
+            </label>);
           return (
             <div className="app">
               <h2 style={{ backgroundColor: 'whitesmoke' }}>Sign up</h2>
@@ -224,31 +231,7 @@ function RegisterPage(props) {
                 </Form.Item>
                 <Form.Item label="Favourites" required>
                   <div role="group" aria-labelledby="checkbox-group">
-                    <label>
-                      <Field type="checkbox" name="favourites" value="One_" />
-              One_
-                    </label>&nbsp;
-                    <label>
-                      <Field type="checkbox" name="favourites" value="Two_" />
-              Two_
-                    </label>&nbsp;
-                    <label>
-                      <Field type="checkbox" name="cfavourites" value="Thr_ee" />
-              Three_
-                    </label> &nbsp;<br/>
-
-                    <label>
-                      <Field type="checkbox" name="favourites" value="One" />
-              One
-                    </label>&nbsp;
-                    <label>
-                      <Field type="checkbox" name="favourites" value="Two" />
-              Two
-                    </label>&nbsp;
-                    <label>
-                      <Field type="checkbox" name="cfavourites" value="Three" />
-              Three
-                    </label> &nbsp;
+                    {fav}
                   </div>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>

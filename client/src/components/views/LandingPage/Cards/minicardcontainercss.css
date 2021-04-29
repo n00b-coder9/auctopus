@@ -1,0 +1,27 @@
+.mini-flex-container {
+  display: flex;
+  width: 1900px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.mini-card-container {
+  width: 1900px;
+  background-color: #fff176;
+}
+.mini-title {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.arrow:hover {
+  transition: 0.5s;
+}
+.arrow:hover {
+  box-shadow: 5px 10px 20px 1px rgba(247, 5, 138, 0.253);
+  transform: scale(1.1);
+}

@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const user = require('./routes/users');
 const product = require('./routes/product');
 const comment = require('./routes/comment');
+const getProduct = require('./routes/mapToProduct');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 // const auth = require('./routes/auth');
@@ -39,6 +41,7 @@ app.use(cookieParser());
 app.use('/api/users/', user);
 app.use('/api/product', product);
 app.use('/api/comment', comment);
+app.use('/getproduct', getProduct);
 
 // app.use('/api/auth/', auth);
 // use this to show the image you have in node js server to client (react js)
@@ -50,6 +53,7 @@ app.use('/api/comment', comment);
 app.use('/uploads', express.static('uploads'));
 // Setup the mongoDB connection
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/auctopus';
+console.log(MONGODB_URL);
 
 // connect to mongodb
 mongoose.connect(
