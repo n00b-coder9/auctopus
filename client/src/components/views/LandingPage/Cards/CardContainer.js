@@ -1,19 +1,33 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import Card from './Card';
 import './cardcontainercss.css';
+import { Redirect } from 'react-router';
+import Badge from 'react-bootstrap/Badge';
 
 
-const arr = ['1', '2', '3', '4', '5', '6', '8'];
 class CardContainer extends Component {
   render() {
+    if (this.props.location.state === undefined) {
+      // console.log('hello');
+      return (
+        <Redirect to='/'/>
+      );
+    };
     return (
-      <div className="flex-container">
-        {
-          arr.map((i) => {
-            return <Card key={i} id={i}/>;
-          })
-        }
+      <div className="major-card-container">
+        <div className='major-title' >
+          <h1><Badge variant="dark">{this.props.location.state.type}</Badge></h1>
+        </div>
+        <div className="flex-container">
+          {
+            this.props.location.state.array.map((i) => {
+              return <Card key={i} img={i.images[0]} title={i.title} />;
+            })
 
+          }
+        </div>
       </div>
     );
   }

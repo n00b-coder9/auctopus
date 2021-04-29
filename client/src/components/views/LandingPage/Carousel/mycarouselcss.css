@@ -1,8 +1,23 @@
 .carousel-container {
   margin-bottom: 100px;
-  width: 80%;
+  width: 75%;
 }
 
 .image {
   border-radius: 50px;
+}
+
+.carousel-textbox {
+  position: absolute;
+  top: 170px;
+  left: 450px;
+
+  color: white;
+}
+
+.carousel-title {
+  position: absolute;
+  top: 100px;
+  left: 620px;
+  color: rgb(183, 245, 13);
 }

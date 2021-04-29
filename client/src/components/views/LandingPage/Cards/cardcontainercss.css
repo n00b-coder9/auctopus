@@ -4,3 +4,12 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.major-title {
+  display: flex;
+  justify-content: center;
+}
+
+.major-card-container {
+  margin-top: 100px;
+}
