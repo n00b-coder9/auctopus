@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -12,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "formik": "^2.2.6",
+    "material-ui": "^0.20.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.0.1",
     "react-datepicker": "^3.8.0",
@@ -21,9 +23,11 @@
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.2",
+    "recharts": "^2.0.9",
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "underscore": "^1.13.1",
     "web-vitals": "^1.0.1",
     "yup": "^0.27.0"
   },
