@@ -172,11 +172,11 @@ function LoginPage1(props) {
               justifyContent: 'center',
               margin: '10px',
             }}>
-              <p>Welcome Page</p>
+              <p>Welcome Back!</p>
               <p style={{
                 fontSize: '20px',
                 fontWeight: 'normal',
-              }}>Sign in to <br/>continue access</p>
+              }}>To keep connected with us<br/> please login with your personal details</p>
             </div>
             <div style={{
               display: 'flex',

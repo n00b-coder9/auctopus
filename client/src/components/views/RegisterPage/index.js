@@ -16,6 +16,12 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import setIsSnackbarOpen from '../../../_actions/snackbar_actions';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -68,21 +74,51 @@ const useStyles = makeStyles((theme) => ({
     margin: '20px',
   },
 }));
+// Shows the mapping of classes with index
+const categories = [
+  {
+    '_id': 1,
+    'name': 'Automobile',
+  },
+  {
+    '_id': 2,
+    'name': 'Fashion',
+  },
+  {
+    '_id': 3,
+    'name': 'Electronics',
+  },
+  {
+    '_id': 4,
+    'name': 'Sports',
+  },
+  {
+    '_id': 5,
+    'name': 'Antiques',
+  },
+  {
+    '_id': 6,
+    'name': 'Miscellaneous',
+  },
+];
 function RegisterPage(props) {
   // State declaration for this component
   const [isFormEnabled, setFormEnabled] = useState(true);
   const classes = useStyles();
-
   const dispatch = useDispatch();
-  const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
-
   const [formErrorMessage, setFormErrorMessage] = useState('');
-  const [rememberMe, setRememberMe] = useState(rememberMeChecked);
-
-  const handleRememberMe = () => {
-    setRememberMe(!rememberMe);
+  const [state, setState] = useState({
+    Automobile: false,
+    Fashion: false,
+    Electronics: false,
+    Sports: false,
+    Antiques: false,
+    Miscellaneous: false,
+  });
+  const handleChange = (event) => {
+    const filled = state[event.target.name];
+    setState({ ...state, [event.target.name]: !filled });
   };
-
   let initialEmail = localStorage.getItem('rememberMe') ? localStorage.getItem('rememberMe') : ' ';
   if (initialEmail == 'undefined') {
     initialEmail = '';
@@ -100,15 +136,24 @@ function RegisterPage(props) {
     onSubmit: (values, { setSubmitting }) => {
       setFormEnabled(false);
       setTimeout(() => {
+        const { Automobile, Fashion, Electronics, Sports, Antiques, Miscellaneous } = state;
+        const fav = [];
+        [Automobile,
+          Fashion, Electronics, Sports, Antiques, Miscellaneous].filter((item, index) => {
+          if (item) {
+            fav.push(index + 1);
+            return item;
+          }
+        });
         const dataToSubmit = {
           email: values.email,
           password: values.password,
           name: values.name,
           lastname: values.lastname,
           image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
-          favourites: values.favourites,
+          favourites: fav,
         };
-
+        console.log(dataToSubmit.favourites);
         dispatch(registerUser(dataToSubmit)).then((response) => {
           if (response.payload.success) {
             dispatch(setIsSnackbarOpen({
@@ -167,11 +212,11 @@ function RegisterPage(props) {
               justifyContent: 'center',
               margin: '10px',
             }}>
-              <p>Welcome Page</p>
+              <p>Hello, Friend!</p>
               <p style={{
                 fontSize: '20px',
                 fontWeight: 'normal',
-              }}>Sign in to <br />continue access</p>
+              }}>Enter your personal details<br />and start your journey with us</p>
             </div>
             <div style={{
               display: 'flex',
@@ -197,7 +242,7 @@ function RegisterPage(props) {
               padding: '5px',
             }}>
               <div style={{
-                height: '30%',
+                height: '20%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignContent: 'flex-start',
@@ -276,6 +321,53 @@ function RegisterPage(props) {
                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                     placeholder="Confirm your password"
                   />
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: '3px',
+                  }}>
+                    <FormControl required component="fieldset">
+                      <FormLabel component="legend">Favourites</FormLabel>
+                      <FormGroup style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                      }}>
+                        <FormControlLabel
+                          control={<Checkbox
+                            checked={state.Automobile} onChange={handleChange} name="Automobile" />}
+                          label="Automobile"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox
+                            checked={state.Fashion} onChange={handleChange} name="Fashion" />}
+                          label="Fashion"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox
+                            checked={state.Electronics}
+                            onChange={handleChange} name="Electronics" />}
+                          label="Electronics"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox
+                            checked={state.Sports} onChange={handleChange} name="Sports" />}
+                          label="Sports"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={state.Antiques} onChange={handleChange} name="Antiques" />}
+                          label="Antiques"
+                        />
+                        <FormControlLabel
+                          control={<Checkbox
+                            checked=
+                              {state.Miscellaneous} onChange={handleChange} name="Miscellaneous" />}
+                          label="Miscellaneous"
+                        />
+                      </FormGroup>
+                    </FormControl>
+                  </div>
                   {/* Register button */}
                   <div style={{
                     display: 'flex',

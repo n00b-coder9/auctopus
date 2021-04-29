@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   linkDefault: {
-    'color': 'inherit',
+    'color': 'white',
     'textDecoration': 'none',
     '&:hover': {
       color: 'inherit',
