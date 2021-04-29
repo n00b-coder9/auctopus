@@ -11,7 +11,6 @@ import { loginUser } from '../../../_actions/user_actions';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import background from '../../../utils/BG.jpg';
-import LoginPage from './LoginPage.js';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
