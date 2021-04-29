@@ -15,29 +15,6 @@ import Logout from './components/views/Logout';
 import Dashboard from './components/views/DashboardPage';
 import DetailProductPage from './components/views/DetailProductPage/DetailProductPage';
 import CardContainer from './components/views/LandingPage/Cards/CardContainer';
-
-// Styles for the whole App
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: 'flex',
-//     flex: '1 0 auto',
-//   },
-//   toolbar: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'flex-end',
-//     padding: theme.spacing(0, 1),
-//     // necessary for content to be below app bar
-//     ...theme.mixins.toolbar,
-//   },
-//   content: {
-//     display: 'flex',
-//     flex: '1 0 auto',
-//     flexDirection: 'column',
-//     padding: theme.spacing(3),
-//   },
-// }));
-// const classes = useStyles();
 import Snackbar from './components/common/Snackbar';
 import setIsSnackbarOpen from './_actions/snackbar_actions';
 import _ from 'underscore';
@@ -66,12 +43,12 @@ function App() {
   const snackbarState = useSelector((state) => state.snackbar, _.isEqual);
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
-      <div className=''>
+      <div className={classes.root}>
         <Navigation />
 
         <main
-          className=''>
-          <div className='' />
+          className={classes.content}>
+          <div className={classes.toolbar} />
 
           {/* App content starts here */}
           <Switch>
