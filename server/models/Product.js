@@ -7,6 +7,10 @@ const productSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  soldTo: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
   title: {
     type: String,
     maxlength: 15,

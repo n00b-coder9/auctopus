@@ -9,7 +9,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 
 import Themes from './themes';
-import Reducer from './_reducers';
+import Reducer from './redux/_reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
