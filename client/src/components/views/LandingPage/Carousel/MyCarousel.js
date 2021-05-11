@@ -6,25 +6,23 @@ import './mycarouselcss.css';
 class MyCarousel extends Component {
   render() {
     return (
-      <div className="carousel-container">
+      <div className="carousel-container" >
         <Carousel>
           <Carousel.Item >
 
             <img
-              className="w-100 image"
+              className="image"
               src='/auction.jpg'
               alt="First slide"
 
-              height="800"
               style={{ border: '2px solid red' }}
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="w-100 image"
+              className="image"
               src='Dark.jpg'
               alt="Third slide"
-              height="800"
               style={{ border: '2px solid red' }}
             />
             <div className='carousel-title'>
@@ -52,10 +50,9 @@ class MyCarousel extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <img
-              className="w-100 image"
+              className="image"
               src='e-bid.jpg'
               alt="Second slide"
-              height="800"
               style={{ border: '2px solid red' }}
 
             />

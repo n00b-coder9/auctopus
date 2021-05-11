@@ -17,6 +17,7 @@ import DetailProductPage from './components/views/DetailProductPage/DetailProduc
 import CardContainer from './components/views/LandingPage/Cards/CardContainer';
 import Snackbar from './components/common/Snackbar';
 import setIsSnackbarOpen from './_actions/snackbar_actions';
+import UpcomingAuction from './components/views/UpcomingAuction/UpcomingAuction';
 import _ from 'underscore';
 // Styles for the whole App
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +62,7 @@ function App() {
             <Route exact path="/product/:productId" component={Auth(DetailProductPage, true)} />
             <Route exact path="/cards" component={CardContainer} />
             <Route exact path='/product/:productid' component={Auth(DetailProductPage, true)} />
+            <Route exact path='/widget' component={Auth(UpcomingAuction, true)} />
           </Switch>
         </main>
         {/* App wide single snackbar */}

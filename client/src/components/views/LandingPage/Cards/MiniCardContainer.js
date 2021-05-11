@@ -38,7 +38,7 @@ class miniCardContainer extends Component {
               type: this.props.type,
             },
           }} className="btn btn-outline-primary arrow" >
-            <img src={img} height='80' width='80' data-toggle="tooltip" title="View More" /></Link>
+            <img src={img} height='55' width='65' data-toggle="tooltip" title="View More" /></Link>
         </div>
       </div>
     );

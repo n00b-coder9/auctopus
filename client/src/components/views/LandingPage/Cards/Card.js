@@ -20,12 +20,12 @@ class Cards extends Component {
         <div className="card-body text-dark" >
           <div >
             <Badge variant="info"><div className="card-title">
-              <h2 style={{ color: 'brown' }}>
-                <i><u><b>{this.props.title.toUpperCase()}</b></u></i></h2>
+              <h3 style={{ color: 'brown' }}>
+                <i><u><b>{this.props.title.toUpperCase()}</b></u></i></h3>
             </div></Badge>
           </div>
           <div className="card-text">
-            <Badge pill variant="warning"><h4>Base Price:-{this.props.price} INR</h4></Badge>
+            <Badge pill variant="warning"><h4>Base Price:-{this.props.price} $</h4></Badge>
           </div>
           <div>
             <Link to={`/product/${this.props._id}`}

@@ -13,8 +13,28 @@ router.get('/', (req, res) => {
       });
 });
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  Product.find({buyers: id})
+      .then((results) => {
+        return res.status(200).send(results);
+      });
+});
 
-// fetching products according to user's favourites
+
+// fetching products according to user's search
+router.post('/search', (req, res) => {
+  const term = req.body.searchTerm;
+  console.log(term);
+
+  Product.find({})
+      .find({$text: {$search: term}})
+      .populate('writer')
+      .exec((err, products) => {
+        if (err) return res.status(400).json({success: false, err});
+        res.status(200).json({success: true, products, postSize: products.length});
+      });
+});
 
 
 module.exports = router;

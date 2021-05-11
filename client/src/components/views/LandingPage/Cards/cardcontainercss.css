@@ -1,6 +1,6 @@
 .flex-container {
   display: flex;
-  width: 1800px;
+  /* width: 1800px; */
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -10,6 +10,6 @@
   justify-content: center;
 }
 
-.major-card-container {
+/* .major-card-container {
   margin-top: 100px;
-}
+} */

@@ -55,10 +55,16 @@ function LandingPage() {
 
 
   return (
-    <div style={{ 'margin-left': '89px', 'margin-top': '90px' }}>
+    <div >
       <div className="landing-container">
-        <MyCarousel />
-        <Navigator />
+        <div>
+          <MyCarousel />
+        </div>
+
+        <div>
+          <Navigator />
+        </div>
+
       </div>
 
       {
