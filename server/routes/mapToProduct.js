@@ -25,7 +25,6 @@ router.get('/:id', (req, res) => {
 // fetching products according to user's search
 router.post('/search', (req, res) => {
   const term = req.body.searchTerm;
-  console.log(term);
 
   Product.find({})
       .find({$text: {$search: term}})
