@@ -53,11 +53,11 @@ export default function Auction(props) {
               const time = new Date();
               const minutes = time.getMinutes();
               const hrs = time.getHours();
-              if (hrs !== hourSlot || (hrs == hourSlot && minutes < 1)) {
-                alert('Sorry..!!You cannot enter the auction now..');
-                socket.disconnect();
-                setLeave(true);
-              }
+              // if (hrs !== hourSlot || (hrs == hourSlot && minutes > 5)) {
+              //   alert('Sorry..!!You cannot enter the auction now..');
+              //   socket.disconnect();
+              //   setLeave(true);
+              // }
             },
         );
       }
@@ -121,15 +121,15 @@ export default function Auction(props) {
     const time = new Date();
     const minutes = time.getMinutes();
     const hrs = time.getHours();
-    if (hrs == hourSlot && minutes < 58) {
-      alert(`Sorry..!!Auction has not started yet.It wil start at ${hrs}:58`);
-    } else {
-      e.preventDefault();
-      socket.emit('new-bid', {
-        bidValue: newBid,
-      });
-      counter++;
-    }
+    // if (hrs == hourSlot && minutes < 5) {
+    //   alert(`Sorry..!!Auction has not started yet.It wil start at ${hrs}:58`);
+    // } else {
+    e.preventDefault();
+    socket.emit('new-bid', {
+      bidValue: newBid,
+    });
+    counter++;
+    // }
   };
 
 
