@@ -2,9 +2,9 @@ body {
   background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
 }
 .card {
-  width: 27rem;
-  height: 590px;
-  margin: 4%;
+  width: 19.5rem;
+  height: 30rem;
+  margin: 3%;
   border-color: solid rgb(15, 10, 10);
   border-width: 2px;
 }
@@ -16,11 +16,11 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 250px;
+  height: 17rem;
 }
 
 .card-title {
-  width: 21rem;
+  width: 17rem;
   margin-bottom: auto;
   font-family: cursive;
 }
@@ -41,7 +41,7 @@ body {
   height: 380px;
 }
 .card-image {
-  height: 350px;
+  height: 300px;
 }
 .card-img-top {
   transform: scale(1);

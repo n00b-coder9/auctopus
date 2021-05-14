@@ -78,4 +78,16 @@ router.post('/add_user', (req, res) => {
       });
 });
 
+
+router.post('/remove_user', (req, res) => {
+  // console.log(req.body);
+  const productId = req.body.productId;
+
+  Product.findOneAndUpdate({ '_id': productId }, { $pull: {'buyers': req.body.writer } })
+      .exec((err, result) => {
+        if (err) return req.status(400).send(err);
+        return res.status(200).json({success: true, result});
+      });
+});
+
 module.exports = router;

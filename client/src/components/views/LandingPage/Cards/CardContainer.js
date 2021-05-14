@@ -23,7 +23,8 @@ class CardContainer extends Component {
         <div className="flex-container">
           {
             this.props.location.state.array.map((i) => {
-              return <Card key={i} img={i.images[0]} title={i.title} />;
+              return <Card key={i} _id={i._id} price={i.basePrice}
+                img={i.images[0]} title={i.title} />;
             })
 
           }

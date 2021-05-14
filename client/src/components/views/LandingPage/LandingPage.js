@@ -55,10 +55,16 @@ function LandingPage() {
 
 
   return (
-    <div>
+    <div >
       <div className="landing-container">
-        <MyCarousel />
-        <Navigator />
+        <div>
+          <MyCarousel />
+        </div>
+
+        <div>
+          <Navigator />
+        </div>
+
       </div>
 
       {

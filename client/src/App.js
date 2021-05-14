@@ -17,6 +17,9 @@ import DetailProductPage from './components/views/DetailProductPage/DetailProduc
 import CardContainer from './components/views/LandingPage/Cards/CardContainer';
 import Snackbar from './components/common/Snackbar';
 import setIsSnackbarOpen from './_actions/snackbar_actions';
+import UpcomingAuction from './components/views/UpcomingAuction/UpcomingAuction';
+import Auction from './components/views/Auction/Auction';
+import Leave from './components/views/Auction/Leave';
 import _ from 'underscore';
 // Styles for the whole App
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +64,9 @@ function App() {
             <Route exact path="/product/:productId" component={Auth(DetailProductPage, true)} />
             <Route exact path="/cards" component={CardContainer} />
             <Route exact path='/product/:productid' component={Auth(DetailProductPage, true)} />
+            <Route exact path='/widget' component={Auth(UpcomingAuction, true)} />
+            <Route exact path='/auction/:productId' component={Auth(Auction, true)} />
+            <Route exact path='/leave' component={Leave} />
           </Switch>
         </main>
         {/* App wide single snackbar */}
