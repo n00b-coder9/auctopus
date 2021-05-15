@@ -8,6 +8,7 @@ const comment = require('./routes/comment');
 const getProduct = require('./routes/mapToProduct');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const editDetails = require('./routes/editDetails');
 // const auth = require('./routes/auth');
 
 // Configuing environment variables
@@ -42,6 +43,7 @@ app.use('/api/users/', user);
 app.use('/api/product', product);
 app.use('/api/comment', comment);
 app.use('/getproduct', getProduct);
+app.use('/editDetails', editDetails);
 
 // app.use('/api/auth/', auth);
 // use this to show the image you have in node js server to client (react js)

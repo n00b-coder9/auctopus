@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* eslint-disable no-console */
 const express = require('express');
 const router = express.Router();

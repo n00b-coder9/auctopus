@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage';
 import RegisterPage from './components/views/RegisterPage';
+import ProfilePage from './components/views/ProfilePage';
 import UploadProductPage from './components/views/UploadProductPage/UploadProductPage';
 import Navigation from './components/Navigation';
 import Logout from './components/views/Logout';
@@ -16,10 +17,10 @@ import Dashboard from './components/views/DashboardPage';
 import DetailProductPage from './components/views/DetailProductPage/DetailProductPage';
 import CardContainer from './components/views/LandingPage/Cards/CardContainer';
 import Snackbar from './components/common/Snackbar';
-import setIsSnackbarOpen from './_actions/snackbar_actions';
 import UpcomingAuction from './components/views/UpcomingAuction/UpcomingAuction';
 import Auction from './components/views/Auction/Auction';
 import Leave from './components/views/Auction/Leave';
+import setIsSnackbarOpen from './redux/_actions/snackbar_actions';
 import _ from 'underscore';
 // Styles for the whole App
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +60,7 @@ function App() {
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route exact path="/register" component={Auth(RegisterPage, false)} />
             <Route exact path='/logout' component={Logout} />
-            <Route exact path='/dashboard' component={Auth(Dashboard)} />
+            <Route exact path='/dashboard' component={Auth(Dashboard, true)} />
             <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} />
             <Route exact path="/product/:productId" component={Auth(DetailProductPage, true)} />
             <Route exact path="/cards" component={CardContainer} />
@@ -67,6 +68,7 @@ function App() {
             <Route exact path='/widget' component={Auth(UpcomingAuction, true)} />
             <Route exact path='/auction/:productId' component={Auth(Auction, true)} />
             <Route exact path='/leave' component={Leave} />
+            <Route exact path='/myprofile' component={Auth(ProfilePage, true)} />
           </Switch>
         </main>
         {/* App wide single snackbar */}

@@ -22,7 +22,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { setIsDrawerOpen } from '../_actions/drawer_actions';
+import { setIsDrawerOpen } from '../redux/_actions/drawer_actions';
 const drawerWidth = 240;
 
 // Define styles for this component

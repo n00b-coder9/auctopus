@@ -32,8 +32,9 @@ import PageTitle from '../../utils/PageTitle';
 import { Typography } from '../../utils/Wrappers';
 import Dot from '../../utils/Sidebar/components/Dot';
 import Table from './components/Table/Table';
-import BigStat from './components/BigStat/BigStat';
 import { withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../../redux/_actions/product_actions';
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -45,13 +46,22 @@ const PieChartData = [
 
 function Dashboard(props) {
   const classes = useStyles();
+  let products = useSelector((state) => state.product.products);
   const theme = useTheme();
 
+  if (products === undefined) {
+    products = [];
+  }
+  if (userProducts === undefined) {
+    userProducts = [];
+  }
   // local
   const [mainChartState, setMainChartState] = useState('monthly');
+  const dispatch = useDispatch();
   useEffect(() => {
     // code to call the data from backend
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
   return (
     <div style={{
       flex: 1,
@@ -400,12 +410,6 @@ function Dashboard(props) {
             </ResponsiveContainer>
           </Widget>
         </Grid>
-        {/* Now we set some stats related to the chart using our BigStat Component */}
-        {mock.bigStat.map((stat) => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
         <Grid item xs={12}>
           <Widget
             title="My Items"

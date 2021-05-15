@@ -7,15 +7,15 @@ import {
   Button,
 } from '@material-ui/core';
 import moment from 'moment';
-import { registerUser } from '../../../_actions/user_actions';
-import { loginUser } from '../../../_actions/user_actions';
+import { registerUser } from '../../../redux/_actions/user_actions';
+import { loginUser } from '../../../redux/_actions/user_actions';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import background from '../../../utils/BG.jpg';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import setIsSnackbarOpen from '../../../_actions/snackbar_actions';
+import setIsSnackbarOpen from '../../../redux/_actions/snackbar_actions';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';

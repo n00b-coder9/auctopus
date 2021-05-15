@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Paper,
-  IconButton,
-  Menu,
-  MenuItem,
   Typography,
 } from '@material-ui/core';
-import { MoreVert as MoreIcon } from '@material-ui/icons';
 import classnames from 'classnames';
 
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 // styles
 import useStyles from './styles';
 
@@ -24,13 +22,11 @@ export default function Widget({
   headerClass,
   style,
   noWidgetShadow,
+  type,
+  clicked,
   ...props
 }) {
   const classes = useStyles();
-
-  // local
-  const [moreButtonRef, setMoreButtonRef] = useState(null);
-  const [isMoreMenuOpen, setMoreMenuOpen] = useState(false);
 
   return (
     <div className={classes.widgetWrapper} style={style && { ...style }}>
@@ -48,18 +44,11 @@ export default function Widget({
               <Typography variant="h5" color="textSecondary" noWrap>
                 {title}
               </Typography>
-              {!disableWidgetMenu && (
-                <IconButton
-                  color="primary"
-                  classes={{ root: classes.moreButton }}
-                  aria-owns="widget-menu"
-                  aria-haspopup="true"
-                  onClick={() => setMoreMenuOpen(true)}
-                  buttonRef={setMoreButtonRef}
-                >
-                  <MoreIcon />
-                </IconButton>
-              )}
+
+              {type === 'editable' &&
+                  <IconButton onClick={clicked} size='small' aria-label='Edit'>
+                    <EditIcon />
+                  </IconButton>}
             </React.Fragment>
           )}
         </div>
@@ -72,26 +61,6 @@ export default function Widget({
           {children}
         </div>
       </Paper>
-      <Menu
-        id="widget-menu"
-        open={isMoreMenuOpen}
-        anchorEl={moreButtonRef}
-        onClose={() => setMoreMenuOpen(false)}
-        disableAutoFocusItem
-      >
-        <MenuItem>
-          <Typography>Edit</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography>Copy</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography>Delete</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography>Print</Typography>
-        </MenuItem>
-      </Menu>
     </div>
   );
 }
