@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage';
 import RegisterPage from './components/views/RegisterPage';
+import ProfilePage from './components/views/ProfilePage';
 import UploadProductPage from './components/views/UploadProductPage/UploadProductPage';
 import Navigation from './components/Navigation';
 import Logout from './components/views/Logout';
@@ -67,6 +68,7 @@ function App() {
             <Route exact path='/widget' component={Auth(UpcomingAuction, true)} />
             <Route exact path='/auction/:productId' component={Auth(Auction, true)} />
             <Route exact path='/leave' component={Leave} />
+            <Route exact path='/myprofile' component={Auth(ProfilePage, true)} />
           </Switch>
         </main>
         {/* App wide single snackbar */}

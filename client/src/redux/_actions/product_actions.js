@@ -25,6 +25,6 @@ export const fetchProducts = async () => {
 
   return {
     type: FETCH_PRODUCTS,
-    products: productArray,
+    payload: productArray,
   };
 };
