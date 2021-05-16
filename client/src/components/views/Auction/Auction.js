@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './auctioncss.css';
 import Bid from './Bid';
@@ -23,6 +23,8 @@ const expiryTimestamp = time;
 export default function Auction(props) {
   let counter = 1;
   let hourSlot;
+
+  const messagesEndRef = useRef(null);
 
 
   const productId = props.match.params.productId;
@@ -116,6 +118,10 @@ export default function Auction(props) {
     setNewBid(currentBid + p);
   }, [currentBid]);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   useEffect(() => {
     socket.on('update-bid', (data) => {
@@ -128,6 +134,7 @@ export default function Auction(props) {
       setCurrentBid(data.newBid.bidValue);
       const audioEl = document.getElementsByClassName('audio-element')[0];
       audioEl.play();
+      scrollToBottom();
     });
 
 
@@ -138,6 +145,7 @@ export default function Auction(props) {
         bidValue: data.newBid.bidValue,
       });
       setCurrentBid(data.newBid.bidValue);
+      scrollToBottom();
     });
 
     socket.on('left', (data) => {
@@ -152,8 +160,7 @@ export default function Auction(props) {
       time.setSeconds(time.getSeconds() + 120);
       restart(time);
     });
-  }, [counter]);
-
+  }, [bids]);
 
   const onBid = (e) => {
     const time = new Date();
@@ -240,14 +247,18 @@ export default function Auction(props) {
                   Leave Auction</button>
       </div>
       <div className="screen-img"
-        style={{ backgroundImage: 'url(/light.jpg)' }}>
-        {
-          bids.map((i) => {
-            return <Bid key={c++} pos={i.pos} name={i.name} bidValue={i.bidValue} />;
-          })
-        }
+        style={{ backgroundImage: 'url(/light.jpg)' }} >
+        <div>
+          {
+            bids.map((i) => {
+              return <Bid key={c++} pos={i.pos} name={i.name} bidValue={i.bidValue} />;
+            })
+          }
+        </div>
+        <div ref={messagesEndRef}/>
 
       </div>
+
       <div className="auction-bar" style={{ paddingTop: '10px', paddingBottom: '4px' }}>
         <div className="bid-component">
           <Badge variant='primary'><h4 style={{

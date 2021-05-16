@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import { Badge } from 'react-bootstrap';
 import './bidcss.css';
 
+
 export default function Bid(props) {
-  console.log('Bid comp', props);
   return (
     <div className={`bid-container ${props.pos}`} >
       <h5>
