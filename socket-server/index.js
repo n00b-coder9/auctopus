@@ -42,7 +42,8 @@ io.on('connect', (socket) => {
         const user = getUser(socket.id);
 
         socket.emit('your-bid', { newBid: bidValue });
-        socket.broadcast.to(user.room).emit('update-bid', { user: user.name, newBid: bidValue });
+      socket.broadcast.to(user.room).emit('update-bid', { user: user.name, newBid: bidValue });
+      io.to(user.room).emit('reset-timer');
         
 
     });

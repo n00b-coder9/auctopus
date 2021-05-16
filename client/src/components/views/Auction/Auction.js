@@ -9,16 +9,22 @@ import Notify from './Notify';
 import io from 'socket.io-client';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
+import { useTimer, useTime } from 'react-timer-hook';
 import axios from 'axios';
 
 const bids = [];
-const socket = io('http://localhost:4000'); ;
+const socket = io('http://localhost:4000');
 let c = 1;
+const time = new Date();
+time.setSeconds(time.getSeconds() + 120);
+const expiryTimestamp = time;
 
 
 export default function Auction(props) {
   let counter = 1;
   let hourSlot;
+
+
   const productId = props.match.params.productId;
   const user = useSelector((state) => state.user);
 
@@ -29,10 +35,22 @@ export default function Auction(props) {
   const [welcome, setWelcome] = useState('');
   const [newUser, setNewUser] = useState('');
   const [onDisconnect, setDisconnect] = useState('');
+  const [onStartAuction, startAuction] = useState(false);
+
+
+  const {
+    seconds,
+    minutes,
+    start,
+    restart,
+  } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
+
+  const clock = useTime({ format: '12-hour' });
 
 
   useEffect(() => {
     if (user.userData !== undefined) {
+      // start();
       if (productId !== undefined) {
         axios.get(`/api/product/products_by_id?id=${productId}`).then(
             (response) => {
@@ -53,7 +71,7 @@ export default function Auction(props) {
               const time = new Date();
               const minutes = time.getMinutes();
               const hrs = time.getHours();
-              // if (hrs !== hourSlot || (hrs == hourSlot && minutes > 5)) {
+              // if (hrs !== hourSlot || (hrs == hourSlot && minutes >= 5)) {
               //   alert('Sorry..!!You cannot enter the auction now..');
               //   socket.disconnect();
               //   setLeave(true);
@@ -75,6 +93,21 @@ export default function Auction(props) {
       });
     }
   }, [user, productId]);
+
+  useEffect(() => {
+    if (clock.minutes == 5) {
+      startAuction(true);
+      start();
+    }
+  }, [clock.minutes]);
+
+  useEffect(() => {
+    if (minutes === 0 && seconds === 0) {
+      alert('Auction over');
+      socket.disconnect();
+      setLeave(true);
+    }
+  }, [seconds]);
 
 
   useEffect(() => {
@@ -113,6 +146,11 @@ export default function Auction(props) {
 
     socket.on('message', (data) => {
       setWelcome(data.text);
+    });
+    socket.on('reset-timer', () => {
+      const time = new Date();
+      time.setSeconds(time.getSeconds() + 120);
+      restart(time);
     });
   }, [counter]);
 
@@ -158,6 +196,10 @@ export default function Auction(props) {
           onDisconnect !== '' &&
         <Notify variant="danger" content={onDisconnect} />
         }
+        {
+          onStartAuction === true &&
+        <Notify variant="light" content="Auction has started..You can bid now..All the Best" />
+        }
       </div>
 
       <audio className="audio-element">
@@ -165,11 +207,36 @@ export default function Auction(props) {
       </audio>
       <div className="auction-bar">
         <Link to={`/product/${productId}`}
-          className='btn btn-primary' style={{ width: '150px' }}>Product Info</Link>
-        <div style={{ fontSize: '50px' }}>
-          <span>min</span>:<span>sec</span>
+          className='btn btn-primary' style={{ width: '130px' }}>Product Info</Link>
+        <div className="clock-container">
+          <Badge variant='warning'><h4 style={{
+            color: 'black',
+            fontFamily: 'cursive',
+          }}><b>Clock</b></h4></Badge>
+          <Badge variant='light' style={{ marginTop: '5px' }}>
+            <div style={{
+              fontSize: '20px', color: 'black',
+              fontFamily: 'cursive' }}>
+              <span>{clock.hours}</span>:<span>{clock.minutes}
+              </span>:<span>{clock.seconds}</span><span>{clock.ampm}</span>
+            </div></Badge>
+
         </div>
-        <button className='btn btn-danger' style={{ width: '150px' }} onClick={leaveAuction}>
+        <div className="clock-container">
+          <Badge variant='warning'><h4 style={{
+            color: 'black',
+            fontFamily: 'cursive',
+          }}><b>Timer</b></h4></Badge>
+          <Badge variant='light' style={{ marginTop: '5px' }}>
+            <div style={{
+              fontSize: '20px', color: 'black',
+              fontFamily: 'cursive' }}>
+              <span>{minutes}</span>:<span>{seconds}</span>
+            </div></Badge>
+
+        </div>
+
+        <button className='btn btn-danger' style={{ width: '130px' }} onClick={leaveAuction}>
                   Leave Auction</button>
       </div>
       <div className="screen-img"
@@ -183,24 +250,24 @@ export default function Auction(props) {
       </div>
       <div className="auction-bar" style={{ paddingTop: '10px', paddingBottom: '4px' }}>
         <div className="bid-component">
-          <Badge variant='primary'><h2 style={{
+          <Badge variant='primary'><h4 style={{
             color: 'black',
             fontFamily: 'cursive',
-          }}><b>Current Bid</b></h2></Badge>
-          <Badge variant='light' style={{ marginTop: '5px' }}><h2 style={{
+          }}><b>Current Bid</b></h4></Badge>
+          <Badge variant='light' style={{ marginTop: '5px' }}><h4 style={{
             color: 'black',
             fontFamily: 'cursive',
-          }}><b>{currentBid} $</b></h2></Badge>
+          }}><b>{currentBid} $</b></h4></Badge>
         </div>
         <div className="bid-component">
-          <Badge variant='warning'><h2 style={{
+          <Badge variant='warning'><h4 style={{
             color: 'black',
             fontFamily: 'cursive',
-          }}><b>Next Expected Bid</b></h2></Badge>
-          <Badge variant='light' style={{ marginTop: '5px' }}><h2 style={{
+          }}><b>Next Expected Bid</b></h4></Badge>
+          <Badge variant='light' style={{ marginTop: '5px' }}><h4 style={{
             color: 'black',
             fontFamily: 'cursive',
-          }}><b>{newBid} $</b></h2></Badge>
+          }}><b>{newBid} $</b></h4></Badge>
 
         </div>
 

@@ -20,6 +20,11 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 .screen-img {
   width: 130vh;
   height: 73vh;
