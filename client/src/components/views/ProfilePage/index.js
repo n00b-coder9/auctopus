@@ -10,7 +10,9 @@ import {
 } from '@material-ui/core';
 import { EditUserDetails, EditUserImg } from './EditUser';
 import { EditItem } from './EditItem';
-import { withRouter } from 'react-router';
+import axios from 'axios';
+import { Categories } from '../../../Categories';
+import { Redirect, withRouter } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import PageTitle from '../../utils/PageTitle/PageTitle';
 import Widget from '../../utils/Widget/Widget';
@@ -78,97 +80,120 @@ const CustomModal = (props) => {
     </div>
   );
 };
-
-// Function to handle our data
-function dataHandler({ totalProducts, user }) {
-  const timeslots = ['', '10:00:00', '16:00:00', '20:00:00', '02:00:00'];
-  const userProducts = [];
-  const soldProducts = [];
-  const unsoldProducts = [];
-  if (totalProducts) {
-    totalProducts.forEach((item, index) => {
-      const temp = item.arr.filter((el) => el.writer === user._id);
-      if (temp.length > 0) {
-        userProducts.push({
-          type: item.type,
-          arr: temp,
-        });
-      }
-    });
-  }
-
-  userProducts.forEach((item, index) => {
-    item.arr.forEach((el) => {
-      const date = el.date.split('T')[0];
-      const auctionTime = new Date(date + ' ' + timeslots[el.timeslot ? el.timeslot : 1]);
-      const currentTime = new Date();
-      if (auctionTime < currentTime) {
-        // const temp = [...soldProducts];
-        soldProducts.push({
-          id: el._id,
-          title: el.title,
-          description: el.description,
-          date: el.date.split('T')[0],
-          category: item.type,
-          basePrice: el.basePrice,
-          status: 'sold',
-        });
-      } else {
-        // const temp = [...unsoldProducts];
-        unsoldProducts.push({
-          id: el._id,
-          title: el.title,
-          description: el.description,
-          date: el.date.split('T')[0],
-          category: item.type,
-          basePrice: el.basePrice,
-          status: 'unsold',
-        });
-      }
-    });
-  });
-  return {
-    userProducts,
-    soldProducts,
-    unsoldProducts,
-  };
-}
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  // const [soldProducts, setSoldProducts] = useState([]);
-  // const [unsoldProducts, setUnsoldProducts] = useState([]);
-  // const [userProducts, setUserProducts] = useState([]);
+  const [soldProducts, setSoldProducts] = useState([]);
+  const [unsoldProducts, setUnsoldProducts] = useState([]);
+  const [userProducts, setUserProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   let user = useSelector((state) => state.user);
   const totalProducts = useSelector((state) => state.product.products);
   if (user !== undefined) {
     user = user.userData;
   }
-  const response = dataHandler({ totalProducts: totalProducts, user: user });
-  let userProducts = []; let soldProducts = []; let unsoldProducts = [];
-  userProducts = (response.userProducts);
-  soldProducts = (response.soldProducts);
-  unsoldProducts = (response.unsoldProducts);
+  // Function to handle our data
+  const dataHandler = async ({ user }) => {
+    setLoading(true);
+    try {
+      const results = await axios.get('http://localhost:8080/getproduct');
+      const totalProducts = [];
+      Categories.map((i) => {
+        const temp = [];
+        results.data.map((j) => {
+          if (j.category === i._id) {
+            temp.push(j);
+          }
+        });
+        if (temp.length > 0) {
+          totalProducts.push({
+            type: i.name,
+            arr: temp,
+          });
+        }
+      });
+      const timeslots = ['', '10:00:00', '16:00:00', '20:00:00', '02:00:00'];
+      const userProducts = [];
+      const soldProducts = [];
+      const unsoldProducts = [];
+      if (totalProducts) {
+        totalProducts.forEach((item, index) => {
+          const temp = item.arr.filter((el) => el.writer === user._id);
+          if (temp.length > 0) {
+            userProducts.push({
+              type: item.type,
+              arr: temp,
+            });
+          }
+        });
+      }
+
+      userProducts.forEach((item, index) => {
+        item.arr.forEach((el) => {
+          const date = el.date.split('T')[0];
+          const auctionTime = new Date(date + ' ' + timeslots[el.timeslot ? el.timeslot : 1]);
+          const currentTime = new Date();
+          if (auctionTime < currentTime) {
+            // const temp = [...soldProducts];
+            soldProducts.push({
+              id: el._id,
+              title: el.title,
+              description: el.description,
+              date: el.date.split('T')[0],
+              category: item.type,
+              basePrice: el.basePrice,
+              status: 'sold',
+            });
+          } else {
+            // const temp = [...unsoldProducts];
+            unsoldProducts.push({
+              id: el._id,
+              title: el.title,
+              description: el.description,
+              date: el.date.split('T')[0],
+              category: item.type,
+              basePrice: el.basePrice,
+              status: 'unsold',
+            });
+          }
+        });
+      });
+      setUserProducts(userProducts);
+      setSoldProducts(soldProducts);
+      setUnsoldProducts(unsoldProducts);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    if (user) {
+      await dataHandler({ user });
+    }
+  }, [user]);
   console.log(soldProducts);
   console.log(unsoldProducts);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+
+
   let content = (<div style={{
     height: '100%',
     width: '100%',
   }}>
     <CircularProgress style={{ flex: 1 }}/>
   </div>);
-  if (user !== undefined) {
+  if (user !== undefined && loading === false) {
     content = (<div className={classes.root}>
 
       <PageTitle title="My Profile" button={<Button
         variant="contained"
         size="large"
         color="secondary"
+        onClick={() => {
+          props.history.push('/myauctions');
+        }}
       >
                 My Auctions
       </Button>} />

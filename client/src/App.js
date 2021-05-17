@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Auth from './hoc/auth';
 // import { makeStyles } from '@material-ui/core';
@@ -22,6 +22,8 @@ import Auction from './components/views/Auction/Auction';
 import Leave from './components/views/Auction/Leave';
 import setIsSnackbarOpen from './redux/_actions/snackbar_actions';
 import _ from 'underscore';
+import MyAuctionsPage from './components/views/MyAuctionsPage';
+import { fetchProducts } from './redux/_actions/product_actions';
 // Styles for the whole App
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +71,7 @@ function App() {
             <Route exact path='/auction/:productId' component={Auth(Auction, true)} />
             <Route exact path='/leave' component={Leave} />
             <Route exact path='/myprofile' component={Auth(ProfilePage, true)} />
+            <Route exact path='/myauctions' component={Auth(MyAuctionsPage, true)} />
           </Switch>
         </main>
         {/* App wide single snackbar */}

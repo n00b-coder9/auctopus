@@ -1,7 +1,7 @@
 import { Categories } from '../../Categories';
 import axios from 'axios';
 import { FETCH_PRODUCTS } from './types';
-export const fetchProducts = async () => {
+export const fetchProducts = () => {
   const productArray = [];
 
   axios.get('http://localhost:8080/getproduct')
