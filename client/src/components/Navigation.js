@@ -149,6 +149,12 @@ function Navigation() {
                             Auctopus
             </Link>
           </Typography>
+          {user !== undefined && <Link to='/myprofile' className={classes.linkDefault}>
+            <img style={{
+              overflow: 'hidden',
+              height: '45px', width: '45px', borderRadius: '45px',
+            }} src={user.image} />
+          </Link>}
         </Toolbar>
       </AppBar>
 

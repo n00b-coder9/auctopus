@@ -3,32 +3,49 @@
 import React, { useEffect, useState } from 'react';
 import MiniCardContainer from './Cards/MiniCardContainer';
 import MyCarousel from './Carousel/MyCarousel';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Categories } from '../../../Categories';
 import Navigator from './Scroller/Navigator';
 import './landingpagecss.css';
-import { fetchProducts } from '../../../redux/_actions/product_actions';
 
-
+let productArray = [];
 function LandingPage() {
-  let productArray = useSelector((state) => state.product.products);
+  const [product, setProduct] = useState([]);
   const [isProductFetched, setProductFetched] = useState(false);
-  const dispatch = useDispatch();
-  if (productArray === undefined) {
+
+
+  useEffect(() => {
     productArray = [];
-  }
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    axios.get('http://localhost:8080/getproduct')
+        .then((results) => {
+          setProduct(results.data);
+          Categories.map((i) => {
+            const temp = [];
+            results.data.map((j) => {
+              if (j.category === i._id) {
+                temp.push(j);
+              }
+            });
+            if (temp.length > 0) {
+              productArray.push({
+                type: i.name,
+                arr: temp,
+              });
+            }
+          });
+          console.log('productarray', productArray);
+        });
+  }, []);
 
 
   useEffect(() => {
-    if (productArray.length > 0) {
+    if (product.length > 0) {
       // console.log('product', product);
       setProductFetched(true, () => {
 
       });
     }
-  }, [productArray]);
+  }, [product]);
 
 
   useEffect(() => {
