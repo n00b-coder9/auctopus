@@ -21,7 +21,6 @@ const expiryTimestamp = time;
 
 
 export default function Auction(props) {
-  let counter = 1;
   let hourSlot;
 
   const messagesEndRef = useRef(null);
@@ -173,7 +172,6 @@ export default function Auction(props) {
     socket.emit('new-bid', {
       bidValue: newBid,
     });
-    counter++;
     // }
   };
 
