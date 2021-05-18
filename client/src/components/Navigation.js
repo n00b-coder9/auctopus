@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
@@ -105,7 +105,8 @@ function Navigation() {
   const dispatch = useDispatch();
   const isDrawerOpen = useSelector((state) => state.drawer.isOpen);
   const user = useSelector((state) => state.user.userData);
-  const isLoggedIn = user ? user.isAuth : null;
+  let isLoggedIn = useState(null);
+  isLoggedIn = user ? user.isAuth : null;
 
   // List of options in the drawer
   const list = [
@@ -149,7 +150,7 @@ function Navigation() {
                             Auctopus
             </Link>
           </Typography>
-          {user !== undefined && <Link to='/myprofile' className={classes.linkDefault}>
+          {isLoggedIn && <Link to='/myprofile' className={classes.linkDefault}>
             <img style={{
               overflow: 'hidden',
               height: '45px', width: '45px', borderRadius: '45px',

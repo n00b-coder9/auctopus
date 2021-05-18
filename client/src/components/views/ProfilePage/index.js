@@ -277,13 +277,13 @@ const ProfilePage = (props) => {
           </Grid>
         </Grid>
         <Grid container style={{ flexDirection: 'column' }} spacing={4} sm={6}>
-          {soldProducts.length > 0 &&
+          {unsoldProducts.length > 0 &&
             <Grid item>
               <Widget title="My Products"clicked={() => {}}>
                 <Table data={unsoldProducts }/>
               </Widget>
             </Grid>}
-          {unsoldProducts.length > 0 &&
+          {soldProducts.length > 0 &&
             <Grid item>
               <Widget title="My Products(Sold)"clicked={() => { }}>
                 <Table data={soldProducts} />
