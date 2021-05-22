@@ -71,4 +71,15 @@ router.get('/logout', auth, (req, res) => {
   });
 });
 
+router.get('/all', (req, res) => {
+  User.find({}).then((results) => {
+    const resArray = results.map((item) => {
+      return {
+        _id: item._id,
+        email: item.email,
+      };
+    });
+    return res.status(200).send(resArray);
+  });
+});
 module.exports = router;

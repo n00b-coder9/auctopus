@@ -143,7 +143,7 @@ const ProfilePage = (props) => {
               date: el.date.split('T')[0],
               category: item.type,
               basePrice: el.basePrice,
-              status: 'sold',
+              status: el.soldTo ? 'sold' : 'unsold',
             });
           } else {
             // const temp = [...unsoldProducts];
@@ -154,7 +154,7 @@ const ProfilePage = (props) => {
               date: el.date.split('T')[0],
               category: item.type,
               basePrice: el.basePrice,
-              status: 'unsold',
+              status: 'upcoming',
             });
           }
         });
@@ -285,7 +285,7 @@ const ProfilePage = (props) => {
             </Grid>}
           {soldProducts.length > 0 &&
             <Grid item>
-              <Widget title="My Products(Sold)"clicked={() => { }}>
+              <Widget title="My Products (past auctions)"clicked={() => { }}>
                 <Table data={soldProducts} />
               </Widget>
             </Grid>
