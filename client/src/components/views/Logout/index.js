@@ -1,10 +1,13 @@
 import { Redirect } from 'react-router';
-import { logoutUser } from '../../../redux/_actions/user_actions';
+import { logoutUser, auth } from '../../../redux/_actions/user_actions';
 import { useDispatch } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
 const Logout = () => {
   const dispatch = useDispatch();
-  dispatch(logoutUser());
+  useEffect(() => {
+    dispatch(logoutUser());
+    dispatch(auth());
+  });
   return (
     <Redirect to='/'/>
   );

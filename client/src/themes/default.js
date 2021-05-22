@@ -5,6 +5,7 @@ const secondary = '#FF5C93';
 const warning = '#FFC260';
 const success = '#3CD4A0';
 const info = '#9013FE';
+const green = '#329da8';
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -30,6 +31,7 @@ const defaultTheme = {
           .toHexString(),
       contrastText: '#FFFFFF',
     },
+    green: { main: green },
     warning: {
       main: warning,
       light: tinycolor(warning)
@@ -110,23 +112,6 @@ const defaultTheme = {
     MuiTouchRipple: {
       child: {
         backgroundColor: 'white',
-      },
-    },
-    MuiTableRow: {
-      root: {
-        height: 56,
-      },
-    },
-    MuiTableCell: {
-      root: {
-        borderBottom: '1px solid rgba(224, 224, 224, .5)',
-        paddingLeft: 24,
-      },
-      head: {
-        fontSize: '0.95rem',
-      },
-      body: {
-        fontSize: '0.95rem',
       },
     },
     PrivateSwitchBase: {
