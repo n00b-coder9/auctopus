@@ -14,7 +14,7 @@ class miniCardContainer extends Component {
     console.log('mini');
     return (
       <div className="mini-card-container"
-        style={{ backgroundImage: 'url(/back4.jpg)' }} id={this.props.type}>
+        style={{ backgroundImage: 'url(/light.jpg)' }} id={this.props.type}>
         <div className='mini-title' >
           <h1><Badge variant="dark">{this.props.type}</Badge></h1>
         </div>

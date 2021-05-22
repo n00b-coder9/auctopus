@@ -12,7 +12,7 @@ body {
   box-shadow: 15px 15px 15px 15px rgba(0, 0, 0, 0.253) !important;
 }
 
-.card-body {
+.card-text-body {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
