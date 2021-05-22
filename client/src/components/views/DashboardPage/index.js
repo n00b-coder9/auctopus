@@ -30,7 +30,6 @@ import {
 import useStyles from './styles';
 
 // components
-import mock from './mock';
 import Widget from '../../utils/Widget/Widget';
 import PageTitle from '../../utils/PageTitle';
 import { Typography } from '../../utils/Wrappers';
