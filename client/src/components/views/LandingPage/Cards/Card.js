@@ -1,20 +1,30 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len*/
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Badge from 'react-bootstrap/Badge';
 import './cardcss.css';
 import img from '../../../utils/Images/img2.jpg';
 import { Popover, Overlay, OverlayTrigger, PopoverContent, PopoverTitle, Tooltip } from 'react-bootstrap';
+import axios from 'axios';
 
 
 function Cards(props) {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const [author, setAuthor] = useState('');
+
   const ref = useRef(null);
 
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/users/getNameWithId/${props.writer}`)
+        .then((result) => {
+          console.log(result);
+          setAuthor(result.data);
+        });
+  }, []);
 
   const handleClick = (event) => {
     setShow(!show);
@@ -56,11 +66,10 @@ function Cards(props) {
         <Popover id="popover-contained">
           <Popover.Title as="h2">Details :- </Popover.Title>
           <Popover.Content>
-            <span style={{ fontSize: '20px' }}><b>Auction Date :- </b></span><span style={{ fontSize: '20px' }}>21/06/2021</span><br />
-            <span style={{ fontSize: '20px' }}><b>Auction Time :- </b></span><span style={{ fontSize: '20px' }}>10:00 PM</span><br />
-            <span style={{ fontSize: '20px' }}><b>Uploaded By :- </b></span><span style={{ fontSize: '20px' }}>Faiz Ansari</span><br />
-            <span style={{ fontSize: '20px' }}><b>Uploaded On :-</b></span><span style={{ fontSize: '20px' }}>15/05/2021</span><br />
-            <span style={{ fontSize: '20px' }}><b>No. Of Participants :- </b></span><span style={{ fontSize: '20px' }}>4</span><br /><br />
+            <span style={{ fontSize: '20px' }}><b>Auction Date :- </b></span><span style={{ fontSize: '20px' }}>{ props.aucDate}</span><br />
+            <span style={{ fontSize: '20px' }}><b>Uploaded By :- </b></span><span style={{ fontSize: '20px' }}>{ author}</span><br />
+            <span style={{ fontSize: '20px' }}><b>Uploaded On :-</b></span><span style={{ fontSize: '20px' }}>{props.createdAt}</span><br />
+            <span style={{ fontSize: '20px' }}><b>No. Of Participants :- </b></span><span style={{ fontSize: '20px' }}>{props.len}</span><br /><br />
             <span style={{ fontSize: '20px' }}>Click <b><i>Register Here</i></b> to get furthur Information & Participate.</span>
           </Popover.Content>
         </Popover>

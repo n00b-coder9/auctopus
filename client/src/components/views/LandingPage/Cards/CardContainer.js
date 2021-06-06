@@ -23,8 +23,17 @@ class CardContainer extends Component {
         <div className="flex-container">
           {
             this.props.location.state.array.map((i) => {
+              const itemDate = i.date;
+              const o = itemDate.toString();
+              const p1 = o.indexOf('T');
+              const y = o.substring(0, p1);
+              const itemD = i.createdAt;
+              const oo = itemD.toString();
+              const p2 = oo.indexOf('T');
+              const x = oo.substring(0, p2);
               return <Card key={i} _id={i._id} price={i.basePrice}
-                img={i.images[0]} title={i.title} />;
+                img={i.images[0]} title={i.title} writer={i.writer} aucDate={y} createdAt={x}
+                len={i.buyers.length}/>;
             })
 
           }
