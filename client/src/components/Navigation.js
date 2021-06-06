@@ -23,6 +23,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { setIsDrawerOpen } from '../redux/_actions/drawer_actions';
+import { Badge } from 'react-bootstrap';
 const drawerWidth = 240;
 
 // Define styles for this component
@@ -150,7 +151,10 @@ function Navigation() {
           {/* Branding */}
           <Typography variant="h6" className={classes.title}>
             <Link to="/" className={classes.linkDefault}>
-                            Auctopus
+              <Badge variant="light" style={{
+                fontFamily: 'cursive',
+              }}>
+                <h5><b>Auctopus</b></h5></Badge>
             </Link>
           </Typography>
           { isLoggedIn && <Link to='/myprofile' className={classes.linkDefault}>

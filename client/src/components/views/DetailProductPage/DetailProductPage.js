@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 import ProductImage from './Sections/ProductImage';
 import ProductInfo from './Sections/ProductInfo';
 import Comments from './Sections/Comments';
+// import logo from '../../utils/Images/SideImg.jpg';
 // import { useDispatch } from 'react-redux';
 function DetailProductPage(props) {
   // const dispatch = useDispatch();
@@ -37,7 +38,8 @@ function DetailProductPage(props) {
     setCommentLists(CommentLists.concat(newComment));
   };
   return (
-    <div className="postPage" style={{ width: '100%', padding: '4rem 7rem' }}>
+    // eslint-disable-next-line max-len
+    <div className="postPage" style={{ width: '100%', padding: '4rem 7rem', border: '20px solid black' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h1>{Product.title}</h1>
       </div>
@@ -45,21 +47,24 @@ function DetailProductPage(props) {
       <br />
 
       <Row gutter={[16, 16]}>
-        <Col lg={12} xs={24}>
+        <Col lg={12} xs={24} style={{ border: '10px solid blue' }}>
           <ProductImage detail={Product} />
         </Col>
-        <Col lg={12} xs={24}>
+        <Col lg={12} xs={24} style={{ paddingLeft: '2rem' }}>
           <ProductInfo detail={Product} />
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col lg={16} xs={24}>
+        <Col lg={24} xs={24}>
           <Comments
             CommentLists={CommentLists}
             postId={Product._id}
             refreshFunction={updateComment}
           />
         </Col>
+        {/* <Col lg={8} xs={24}>
+          <img src={logo} style={{ width: '100%', height: '300%' }}/>
+        </Col> */}
 
       </Row>
     </div>

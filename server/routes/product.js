@@ -5,9 +5,18 @@
 const express = require('express');
 const router = express.Router();
 const { Product } = require('../models/Product');
+const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'auctopus1010@gmail.com',
+    pass: 'Auctopus123+',
+  },
+});
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -83,9 +92,44 @@ router.post('/remove_user', (req, res) => {
   // console.log(req.body);
   const productId = req.body.productId;
 
-  Product.findOneAndUpdate({ '_id': productId }, { $pull: {'buyers': req.body.writer } })
+  // eslint-disable-next-line max-len
+  Product.findOneAndUpdate({ '_id': productId }, {new: true}, { $pull: {'buyers': req.body.writer } })
       .exec((err, result) => {
         if (err) return req.status(400).send(err);
+        return res.status(200).json({success: true, result});
+      });
+});
+
+router.post('/sold', (req, res) => {
+  const productId = req.body.productId;
+  const soldTo = req.body.soldTo;
+  const email = req.body.email;
+
+  Product.findOneAndUpdate({ '_id': productId }, { $set: { 'soldTo': soldTo } })
+      .exec((err, result) => {
+        if (err) return req.status(400).send(err);
+
+        transporter.sendMail({
+          to: email,
+          from: 'auctopus1010@gmail.com',
+          subject: 'Winner of the auction',
+          html: `
+                     <h5>
+                     Congratulations you have won the auction!!
+                     <h5>
+                     you have won
+                     </h5>
+                     <h2>
+                     ${result.title}
+                     </h2>
+                     <h3>
+                     ${result.description}
+                     </h3>
+                     </h5>
+                     
+                     `,
+        });
+
         return res.status(200).json({success: true, result});
       });
 });

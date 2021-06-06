@@ -7,7 +7,7 @@ import {
 import { useSelector } from 'react-redux';
 import Widget from '../../utils/Widget/Widget';
 import PageTitle from '../../utils/PageTitle/PageTitle';
-import Card from './components/cards';
+import Page from './components/cards/Page';
 import axios from 'axios';
 import { Categories } from '../../../Categories';
 import { CircularProgress } from '@material-ui/core';
@@ -119,15 +119,17 @@ const myAuctions = (props) => {
       <PageTitle title="My Auctions" />
       <Grid container direction='column' spacing={2}>
         <Grid item>
-          <Widget title="Ongoing Auctions">
+          <Widget title="Ongoing Auctions" >
             <Grid item>
               <div style={{
                 display: 'flex',
                 flexDirection: 'row',
+                flexWrap: 'wrap',
+                backgroundImage: 'url(https://wallpaperaccess.com/full/1249336.jpg)',
               }}>
                 {currentProducts.length > 0 && currentProducts.map((i) => {
-                  return <Card type='ongoing' key={i} _id={i._id} price={i.basePrice}
-                    img={i.images[0]} title={i.title} />;
+                  return <Page type='ongoing' key={i} _id={i._id} price={i.basePrice}
+                    img={i.images[0]} title={i.title} date={ i.date}/>;
                 })}
                 {currentProducts.length === 0 &&
                   <div
@@ -146,10 +148,12 @@ const myAuctions = (props) => {
               <div style={{
                 display: 'flex',
                 flexDirection: 'row',
+                flexWrap: 'wrap',
+                backgroundImage: 'url(https://wallpaperaccess.com/full/1249336.jpg)',
               }}>
                 {unsoldProducts.length > 0 && unsoldProducts.map((i) => {
-                  return <Card type='upcoming' key={i} _id={i._id} price={i.basePrice}
-                    img={i.images[0]} title={i.title} />;
+                  return <Page type='upcoming' key={i} _id={i._id} price={i.basePrice}
+                    img={i.images[0]} title={i.title} date={ i.date} />;
                 })}
                 {unsoldProducts.length === 0 &&
                   <div

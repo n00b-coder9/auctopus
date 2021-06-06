@@ -1,0 +1,43 @@
+body {
+  background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
+}
+.page {
+  width: 48%;
+  height: 36vh;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid brown !important;
+}
+.page:hover {
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.253) !important;
+}
+.page-text-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 200%;
+  border-right: 2px solid brown;
+}
+.page-img {
+  width: 97%;
+  height: 30vh;
+}
+.page-img:hover {
+  transform: scale(1.1);
+  transition: transform 1.5s;
+}
+.page-img-container {
+  width: 100%;
+  padding-top: 3%;
+  overflow: hidden;
+}
+/* .btn :hover {
+  transition: 0.5s;
+}
+.btn :hover {
+  box-shadow: 5px 10px 20px 1px rgba(247, 5, 138, 0.253);
+  transform: scale(1.1);
+} */

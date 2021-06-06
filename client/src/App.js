@@ -7,7 +7,9 @@ import { makeStyles } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 // pages for this product
 import LandingPage from './components/views/LandingPage/LandingPage';
-import LoginPage from './components/views/LoginPage';
+import LoginPage from './components/views/LoginPage/index';
+import NewPassword from './components/views/LoginPage/Newpassword';
+import Reset from './components/views/LoginPage/Reset';
 import RegisterPage from './components/views/RegisterPage';
 import ProfilePage from './components/views/ProfilePage';
 import UploadProductPage from './components/views/UploadProductPage/UploadProductPage';
@@ -72,6 +74,12 @@ function App() {
             <Route exact path='/leave' component={Leave} />
             <Route exact path='/myprofile' component={Auth(ProfilePage, true)} />
             <Route exact path='/myauctions' component={Auth(MyAuctionsPage, true)} />
+            <Route exact path="/reset">
+              <Reset/>
+            </Route>
+            <Route path="/reset/:token">
+              <NewPassword />
+            </Route>
           </Switch>
         </main>
         {/* App wide single snackbar */}

@@ -12,6 +12,7 @@ let productArray = [];
 function LandingPage() {
   const [product, setProduct] = useState([]);
   const [isProductFetched, setProductFetched] = useState(false);
+  const today = new Date();
 
 
   useEffect(() => {
@@ -23,7 +24,18 @@ function LandingPage() {
             const temp = [];
             results.data.map((j) => {
               if (j.category === i._id) {
-                temp.push(j);
+                const itemDateAndTime = j.date;
+                const o = itemDateAndTime.toString();
+                const p1 = o.indexOf('-');
+                const y = o.substring(0, p1);
+                const p2 = o.indexOf('-', p1 + 1);
+                const m = o.substring(p1 + 1, p2);
+                const p3 = o.indexOf('T');
+                const d = o.substring(p2 + 1, p3);
+                const itemDate = new Date(y, m - 1, d);
+                if (itemDate >= today) {
+                  temp.push(j);
+                }
               }
             });
             if (temp.length > 0) {
